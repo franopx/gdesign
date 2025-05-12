@@ -11,6 +11,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var logger = Logger();
+  
+  // Concept generator
   String concept = 'Tap to generate!';
   void generate() {
     setState(() {
@@ -19,36 +21,82 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Widget: Concept generator
+  Container generatorContainer(String concept) { 
+    return Container(
+      color: Colors.red,
+      child: FractionallySizedBox(
+        widthFactor: 1,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            children: [
+              Text(concept),
+              Icon(Icons.coffee),
+              TextButton(
+                onPressed: generate,
+                child: const Text('Generate')
+              )
+            ],
+          )
+        )
+      )
+    );
+  }
+
+
+  // Widget: Changelog cards
+  Card createChangelogCard(String title) {
+    Card card = Card(
+      child: Row(
+        children: [
+          Icon(Icons.check),
+          Text(title)
+        ],
+      )
+    );
+
+    return card;
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    
-    return Padding(
+
+    return Center(child: FractionallySizedBox(
+      alignment: Alignment.center,
+      widthFactor: 0.8,
+      child: Padding(
       padding: const EdgeInsets.all(25),
       child: Center(
         child: Column(
           children: [
+
             // Generate Section
+            generatorContainer(concept),
+            
             SizedBox(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    Text(concept),
-                    Icon(Icons.coffee),
-                    TextButton(
-                      onPressed: generate,
-                      child: const Text('Generate')
-                    )
+                    Text('Updates'),
+                    createChangelogCard("Update 1.3: Added new setting prompts."),
+                    createChangelogCard("Update 1.2: Added new subject prompts."),
+                    createChangelogCard("Update 1.2: Added new genre prompts."),
+                    createChangelogCard("Update 1.1: Fix generation bug.")
                   ],
                 )
               )
-            ),
+            )
           ]
         )
       )
+    ))
     );
   }
 }
+
 
 class ConceptGenerator {
 

@@ -21,22 +21,60 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Widget: Generator buttons
+  ElevatedButton generatorButtons(String label, VoidCallback onPress)
+  {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()), // Para darle bordes cuadrados
+      onPressed: onPress, 
+      child: Text(label)
+    );
+  }
+
   // Widget: Concept generator
   Container generatorContainer(String concept) { 
     return Container(
-      color: Colors.red,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.red.shade200
+        ),
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: Column(
             children: [
-              Text(concept),
-              Icon(Icons.coffee),
-              TextButton(
-                onPressed: generate,
-                child: const Text('Generate')
-              )
+              
+              Text('Your game concept:'),
+
+              // Empty space
+              SizedBox(height: 20,),
+
+              // Concept text
+              SizedBox(
+                height: 150,
+                child:
+                  Text(
+                    concept,
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  )
+              ),
+              
+              // Empty space
+              SizedBox(height: 20,),
+              
+              // Button row
+              Row(
+                children: [
+                  Expanded(flex: 2, child: generatorButtons('Save', generate)),
+                  SizedBox(width: 5),
+                  Expanded(flex: 2, child: generatorButtons('Copy', generate)),
+                  SizedBox(width: 5),
+                  Expanded(flex: 3, child: generatorButtons('Generate', generate)),
+                ],
+              ),
             ],
           )
         )
@@ -46,16 +84,30 @@ class _HomePageState extends State<HomePage> {
 
 
   // Widget: Changelog cards
-  Card createChangelogCard(String title) {
+  Card createChangelogCard(String title, String summary) {
     Card card = Card(
-      child: Row(
-        children: [
-          Icon(Icons.check),
-          Text(title)
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Align(alignment: Alignment.centerLeft, 
+              child: 
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+                )
+            ),
+            Row(
+              children: [
+                Icon(Icons.arrow_right),
+                Text(summary)  
+              ],
+            ),
+            ElevatedButton(onPressed: generate, child: Text('Details'))
+          ],
+        )
       )
     );
-
     return card;
   }
 
@@ -65,26 +117,50 @@ class _HomePageState extends State<HomePage> {
 
     return Center(child: FractionallySizedBox(
       alignment: Alignment.center,
-      widthFactor: 0.8,
+      widthFactor: 0.97,
       child: Padding(
       padding: const EdgeInsets.all(25),
       child: Center(
         child: Column(
           children: [
 
-            // Generate Section
+            // Generate section
             generatorContainer(concept),
-            
+
+            // Space between sections
+            SizedBox(height: 32,),
+
             SizedBox(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    Text('Updates'),
-                    createChangelogCard("Update 1.3: Added new setting prompts."),
-                    createChangelogCard("Update 1.2: Added new subject prompts."),
-                    createChangelogCard("Update 1.2: Added new genre prompts."),
-                    createChangelogCard("Update 1.1: Fix generation bug.")
+                    Text(
+                      'Lastest updates',
+                      style: TextStyle(
+                        fontSize: 18
+                      )
+                      ),
+                    
+                    SizedBox(height: 10,),
+
+                    SizedBox(
+                      height: 300,
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
+                              createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
+                              createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
+                              createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
+                              createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
+                            ],
+                          )
+                        )
+                      )
+                    )
                   ],
                 )
               )

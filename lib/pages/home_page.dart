@@ -181,7 +181,7 @@ class ConceptGenerator {
     'A first person shooter game about ',
     'A moba game about ',
     'A puzzle game about ',
-    'A rougelike game about ',
+    'A roguelike game about ',
     'A role playing game about ',
     'An action game about ',
     'A hack and slash game about '

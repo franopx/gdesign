@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
             // Space between sections
             SizedBox(height: 32,),
 
-            SizedBox(
+            Expanded(
               child: Column(
                 children: [
                   Text(
@@ -152,26 +152,27 @@ class _HomePageState extends State<HomePage> {
                   
                   SizedBox(height: 10,),
 
-                  SizedBox(
-                    height: 300,
+                  Expanded(
                     child: Scrollbar(
-                      thumbVisibility: true,
                       child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
-                            createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
-                            createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
-                            createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
-                            createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
-                          ],
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
+                              createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
+                              createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
+                              createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
+                              createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
+                            ],
+                          )
                         )
                       )
                     )
                   )
-                  )
+
+
+
                 ],
               )
               

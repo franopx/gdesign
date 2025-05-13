@@ -103,7 +103,17 @@ class _HomePageState extends State<HomePage> {
                 Text(summary)  
               ],
             ),
-            ElevatedButton(onPressed: generate, child: Text('Details'))
+            
+            FractionallySizedBox(
+              widthFactor: 1,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
+                onPressed: generate, 
+                child: Text('Details')
+              )
+            )
+
+            
           ],
         )
       )
@@ -131,39 +141,40 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 32,),
 
             SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Text(
-                      'Lastest updates',
-                      style: TextStyle(
-                        fontSize: 18
-                      )
-                      ),
-                    
-                    SizedBox(height: 10,),
+              child: Column(
+                children: [
+                  Text(
+                    'Lastest updates',
+                    style: TextStyle(
+                      fontSize: 18
+                    )
+                    ),
+                  
+                  SizedBox(height: 10,),
 
-                    SizedBox(
-                      height: 300,
-                      child: Scrollbar(
-                        thumbVisibility: true,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
-                              createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
-                              createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
-                              createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
-                              createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
-                            ],
-                          )
+                  SizedBox(
+                    height: 300,
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
+                            createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
+                            createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
+                            createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
+                            createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
+                          ],
                         )
                       )
                     )
-                  ],
-                )
+                  )
+                  )
+                ],
               )
+              
             )
           ]
         )

@@ -8,10 +8,14 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
+
+  // Widgets here
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.yellow,
       child: const Center(
         child: Text('About')
       )

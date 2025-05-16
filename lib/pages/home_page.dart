@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   
   // Concept generator
   String concept = 'Tap to generate!';
-  Image conceptIcon = Image.asset('assets/images/game/pistol.png', width: 64, height: 64,);
+  Image conceptIcon = Image.asset('assets/images/game/idea.png', width: 64, height: 64,);
   void generate() {
     setState(() {
       

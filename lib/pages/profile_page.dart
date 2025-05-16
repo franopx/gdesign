@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Text(
                 'Email: spelunkypilot@gmail.com'
-              )
+              ),
             ],
           ),
         )
@@ -42,12 +42,32 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Container(
+        child: 
+        Column( children: [
+        Container(
           decoration: BoxDecoration(
             color: Colors.red.shade200,
             borderRadius: BorderRadius.circular(15)
             ),
-          child: SizedBox(height: 200, child: mainColumn),
+          child: SizedBox(
+                  height: 200, 
+                  child: mainColumn
+                ),
+
+            ),
+        SizedBox(
+          height: 200, 
+          child: Column(
+            children: [
+              SizedBox(height: 40,),
+              Text('About GDesign:'),
+              SizedBox(height: 10,),
+              Text('GDesign is an app created for game designers in hopes of helping conceptualize and ideate game ideas quickly.'),
+              SizedBox(height: 5,),
+              Text('Created by Francisco Galeno')],
+            )
+          ),
+        ]
         )
       )
 

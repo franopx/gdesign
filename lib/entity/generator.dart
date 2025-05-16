@@ -5,8 +5,9 @@ import 'prompt.dart';
 class Generator {
 
   Prompt currentPrompt = Prompt("Tap to generate!");
+  List<Prompt> promptHistory = [];
 
-  List<String> gameGenres = [
+  final List<String> _gameGenres = [
     'A platformer game about ',
     'A first person shooter game about ',
     'A moba game about ',
@@ -17,7 +18,7 @@ class Generator {
     'A hack and slash game about '
   ];
 
-  List<String> gameSubjects = [
+  final List<String> _gameSubjects = [
     'a group of heroes ',
     'a young hero ',
     'a magic creature ',
@@ -30,9 +31,8 @@ class Generator {
     'pirates ',
     'ninjas '
   ];
-
   
-  List<String> gameConcepts = [
+  final List<String> _gameConcepts = [
     'trying to save the world.',
     'competing in a tournament.',
     'destroying an evil empire.',
@@ -46,16 +46,17 @@ class Generator {
   ];
 
   Prompt generateConcept() {
-    int genres = gameGenres.length;
-    int subjects = gameSubjects.length;
-    int concepts = gameConcepts.length;
+    int genres = _gameGenres.length;
+    int subjects = _gameSubjects.length;
+    int concepts = _gameConcepts.length;
 
     int genre = Random().nextInt(genres);
     int subject = Random().nextInt(subjects);
     int concept = Random().nextInt(concepts);
 
-    Prompt createdPrompt = Prompt(gameGenres[genre] + gameSubjects[subject] + gameConcepts[concept]);
+    Prompt createdPrompt = Prompt(_gameGenres[genre] + _gameSubjects[subject] + _gameConcepts[concept]);
 
+    promptHistory.add(createdPrompt);
     currentPrompt = createdPrompt;
     return currentPrompt;
   }

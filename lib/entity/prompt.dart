@@ -1,10 +1,9 @@
 
 class Prompt {
-  String promptText;
+  String text;
   int id = -1;
 
-  void editPrompt(String newText) {promptText = newText;}
-  String getPromptText() {return promptText;}
+  void editPrompt(String newText) {text = newText;}
 
-  Prompt(this.promptText);
+  Prompt(this.text);
 }

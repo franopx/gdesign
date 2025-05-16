@@ -1,6 +1,6 @@
-# gdesign
+# GDesign
 
-A new Flutter project.
+A game conceptualizing app.
 
 ## Getting Started
 

@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-
+import 'package:gdesign/entity/generator.dart';
+import 'package:gdesign/entity/prompt.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,10 @@ class _HomePageState extends State<HomePage> {
   String concept = 'Tap to generate!';
   void generate() {
     setState(() {
-      concept = ConceptGenerator().generateConcept();
+      
+      Prompt generatedPrompt = Generator().generateConcept();
+
+      concept = generatedPrompt.text;
       logger.d(concept);
     });
   }

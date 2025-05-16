@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gdesign/pages/about_page.dart';
 import 'package:gdesign/pages/home_page.dart';
 import 'package:gdesign/pages/library_page.dart';
 import 'package:gdesign/pages/profile_page.dart';
@@ -18,7 +17,6 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const LibraryPage(),
     const ProfilePage(),
-    const AboutPage()
   ];
 
   @override
@@ -45,9 +43,6 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About'),
         ]
       ),
     );

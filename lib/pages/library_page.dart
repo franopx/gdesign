@@ -70,7 +70,7 @@ class _LibraryPageState extends State<LibraryPage> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                      onPressed: cardDetails, 
+                      onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Feature coming next update!')),);}, 
                       child: Text('Edit')
                     )
                   ),
@@ -78,7 +78,7 @@ class _LibraryPageState extends State<LibraryPage> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                      onPressed: cardDetails, 
+                      onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Prompt copied!')),);}, 
                       child: Text('Copy')
                     )
                   )
@@ -141,7 +141,38 @@ class _LibraryPageState extends State<LibraryPage> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                  onPressed: cardDetails, 
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('New prompt'),
+                        content: 
+                          SizedBox(width: 500, height: 300,
+                            child:
+                              Column(children: [
+                                Row(children: [Text('Text: '), Text(' Write here...', style: TextStyle(color: Colors.blueGrey),)],),
+                                Row(
+                                  children: [Text('Icon: '), 
+                                  DropdownButton<String>(
+                                    value: '0',
+                                    onChanged: (value) {},
+                                    items: [
+                                      DropdownMenuItem(value: '0', child: Text('idea')),
+                                      DropdownMenuItem(value: '1', child: Text('sword')),
+                                      DropdownMenuItem(value: '2', child: Text('gun')),
+                                      DropdownMenuItem(value: '3', child: Text('puzzle')),
+                                      DropdownMenuItem(value: '4', child: Text('jump'))
+                                    ],
+                                  )],)
+                              ],)
+                          ),
+                        actions: [
+                          TextButton(child: Text('Cancel'), onPressed: () {Navigator.of(context).pop();}),
+                          TextButton(child: Text('Save'), onPressed: () {Navigator.of(context).pop();})
+                        ],
+                      )
+                    );
+                  }, 
                   child: Text('Add manual prompt')
                 )
               ),

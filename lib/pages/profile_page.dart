@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 textAlign: TextAlign.right,
               ),
               Text(
-                'spelunkypilot@gmail.com'
+                'Email: spelunkypilot@gmail.com'
               )
             ],
           ),

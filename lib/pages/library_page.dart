@@ -55,7 +55,8 @@ class _LibraryPageState extends State<LibraryPage> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: Text('Are you sure you want to delete the prompt: $title?'),
+                            title: Text('Remove prompt'),
+                            content: Text('Are you sure you want to delete this prompt?\n\n$title'),
                             actions: [
                               TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('No')),
                               TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('Yes')),
@@ -129,7 +130,7 @@ class _LibraryPageState extends State<LibraryPage> {
                           createPromptCard(context),
                           createPromptCard(context),
                           createPromptCard(context),
-                          
+
 
                         ],)
                   )),

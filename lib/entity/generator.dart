@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'prompt.dart';
-
+import 'package:flutter/material.dart';
 
 class Generator {
 
-  Prompt currentPrompt = Prompt("Tap to generate!");
+  Prompt currentPrompt = Prompt("Tap to generate!", Image.asset('assets/images/game/idea.png'));
   List<Prompt> promptHistory = [];
 
   final List<String> _gameGenres = [
@@ -45,16 +45,27 @@ class Generator {
     'uncovering an ancient prophecy.'
   ];
 
+  final List<Image> _gameIcons = [
+    Image.asset('assets/images/game/difficulties.png', width: 64, height: 64,),
+    Image.asset('assets/images/game/idea.png', width: 64, height: 64,),
+    Image.asset('assets/images/game/pistol.png', width: 64, height: 64,),
+    Image.asset('assets/images/game/puzzle-piece.png', width: 64, height: 64,),
+    Image.asset('assets/images/game/sword.png', width: 64, height: 64,),
+    Image.asset('assets/images/game/target.png', width: 64, height: 64,)
+  ];
+
   Prompt generateConcept() {
     int genres = _gameGenres.length;
     int subjects = _gameSubjects.length;
     int concepts = _gameConcepts.length;
+    int icons = _gameIcons.length;
 
     int genre = Random().nextInt(genres);
     int subject = Random().nextInt(subjects);
     int concept = Random().nextInt(concepts);
+    int icon = Random().nextInt(icons);
 
-    Prompt createdPrompt = Prompt(_gameGenres[genre] + _gameSubjects[subject] + _gameConcepts[concept]);
+    Prompt createdPrompt = Prompt(_gameGenres[genre] + _gameSubjects[subject] + _gameConcepts[concept], _gameIcons[icon]);
 
     promptHistory.add(createdPrompt);
     currentPrompt = createdPrompt;

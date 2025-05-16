@@ -16,12 +16,14 @@ class _HomePageState extends State<HomePage> {
   
   // Concept generator
   String concept = 'Tap to generate!';
+  Image conceptIcon = Image.asset('assets/images/game/pistol.png', width: 64, height: 64,);
   void generate() {
     setState(() {
       
       Prompt generatedPrompt = Generator().generateConcept();
 
       concept = generatedPrompt.text;
+      conceptIcon = generatedPrompt.icon;
       logger.d(concept);
     });
   }
@@ -55,6 +57,7 @@ class _HomePageState extends State<HomePage> {
               // Empty space
               SizedBox(height: 20,),
 
+              conceptIcon,
               // Concept text
               SizedBox(
                 height: 150,
@@ -67,17 +70,33 @@ class _HomePageState extends State<HomePage> {
                   )
               ),
               
+              
               // Empty space
               SizedBox(height: 20,),
               
               // Button row
               Row(
                 children: [
-                  Expanded(flex: 2, child: generatorButtons('Save', generate)),
+                  Expanded(
+                    flex: 2, 
+                    child: generatorButtons(
+                      'Save', 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Prompt saved to Library!')),);})
+                  ),
                   SizedBox(width: 5),
-                  Expanded(flex: 2, child: generatorButtons('Copy', generate)),
+                  Expanded(
+                    flex: 2, 
+                    child: generatorButtons(
+                      'Copy', 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Prompt copied!')),);})
+                  ),
                   SizedBox(width: 5),
-                  Expanded(flex: 3, child: generatorButtons('Generate', generate)),
+                  Expanded(
+                    flex: 3, 
+                    child: generatorButtons(
+                      'Generate', 
+                      generate)
+                  ),
                 ],
               ),
             ],
@@ -89,7 +108,7 @@ class _HomePageState extends State<HomePage> {
 
 
   // Widget: Changelog cards
-  Card createChangelogCard(String title, String summary) {
+  Card createChangelogCard(BuildContext context, String title, String summary) {
     Card card = Card(
       child: Padding(
         padding: EdgeInsets.all(10),
@@ -113,12 +132,25 @@ class _HomePageState extends State<HomePage> {
               widthFactor: 1,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                onPressed: generate, 
+                onPressed: () {showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Details'),
+                    content: SizedBox(
+                      width: 100, height: 100,
+                      child: Column(
+                        children: [Text(title, style: TextStyle(fontWeight: FontWeight.bold),), Text(summary)],
+                      ),
+                    ),
+                    actions: [
+                      TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('OK'))
+                    ],
+                  )
+                  );
+                },
                 child: Text('Details')
               )
             )
-
-            
           ],
         )
       )
@@ -164,11 +196,11 @@ class _HomePageState extends State<HomePage> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              createChangelogCard("Update 1.3 Changelog", "Added new setting prompts."),
-                              createChangelogCard("GDesign app now available on Desktop!", "Launched desktop vesion."),
-                              createChangelogCard("Update 1.2 Changelog", "Added new subject prompts."),
-                              createChangelogCard("Update 1.2 Changelog", "Added new genre prompts."),
-                              createChangelogCard("Update 1.1 Changelog", "Fix generation bug.")
+                              createChangelogCard(context, "Update 1.3 Changelog", "Added new setting prompts."),
+                              createChangelogCard(context, "GDesign app now available on Desktop!", "Launched desktop vesion."),
+                              createChangelogCard(context, "Update 1.2 Changelog", "Added new subject prompts."),
+                              createChangelogCard(context, "Update 1.2 Changelog", "Added new genre prompts."),
+                              createChangelogCard(context, "Update 1.1 Changelog", "Fix generation bug.")
                             ],
                           )
                         )
@@ -187,60 +219,5 @@ class _HomePageState extends State<HomePage> {
       )
     ))
     );
-  }
-}
-
-
-class ConceptGenerator {
-
-  List<String> gameGenres = [
-    'A platformer game about ',
-    'A first person shooter game about ',
-    'A moba game about ',
-    'A puzzle game about ',
-    'A roguelike game about ',
-    'A role playing game about ',
-    'An action game about ',
-    'A hack and slash game about '
-  ];
-
-  List<String> gameSubjects = [
-    'a group of heroes ',
-    'a young hero ',
-    'a magic creature ',
-    'abstract shapes ',
-    'cards ',
-    'racing cars ',
-    'toys ',
-    'adventurers ',
-    'a robot ',
-    'pirates ',
-    'ninjas '
-  ];
-
-  
-  List<String> gameConcepts = [
-    'trying to save the world.',
-    'competing in a tournament.',
-    'destroying an evil empire.',
-    'discovering an unknown world.',
-    'on a introspective journey.',
-    'traveling across the universe.',
-    'searching for a disappeared friend.',
-    'playing a sport.',
-    'collecting sacred artifacts.',
-    'uncovering an ancient prophecy.'
-  ];
-
-  String generateConcept() {
-    int genres = gameGenres.length;
-    int subjects = gameSubjects.length;
-    int concepts = gameConcepts.length;
-
-    int genre = Random().nextInt(genres);
-    int subject = Random().nextInt(subjects);
-    int concept = Random().nextInt(concepts);
-
-    return gameGenres[genre] + gameSubjects[subject] + gameConcepts[concept];
   }
 }

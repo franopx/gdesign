@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   logger: ^2.5.0
   flutter_native_splash: ^2.4.6
+  change_app_package_name: ^1.5.0
 
 dev_dependencies:
   flutter_test:

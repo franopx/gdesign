@@ -1,4 +1,4 @@
-package com.example.gdesign
+package com.franopx.gdesign
 
 import io.flutter.embedding.android.FlutterActivity
 

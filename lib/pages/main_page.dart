@@ -23,7 +23,9 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context)
   {
     return Scaffold(
-      appBar: AppBar(title: Text('GDesign'), backgroundColor: Colors.red, foregroundColor: Colors.white,),
+      appBar: AppBar(title: 
+        Text('GDesign', style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer)), 
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer, foregroundColor: Theme.of(context).colorScheme.surface,),
       body: pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,

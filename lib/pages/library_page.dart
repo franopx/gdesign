@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gdesign/entity/generator.dart';
-import 'package:gdesign/entity/generator.dart';
-import 'package:gdesign/entity/prompt.dart';
+import 'package:gdesign/domain/entities/generator.dart';
+import 'package:gdesign/domain/entities/generator.dart';
+import 'package:gdesign/domain/entities/prompt.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});

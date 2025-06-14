@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:gdesign/entity/generator.dart';
-import 'package:gdesign/entity/prompt.dart';
+import 'package:gdesign/domain/entities/generator.dart';
+import 'package:gdesign/domain/entities/prompt.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   ElevatedButton generatorButtons(String label, VoidCallback onPress)
   {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()), // Para darle bordes cuadrados
+      style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder( borderRadius: BorderRadiusGeometry.circular(16))), // Para darle bordes cuadrados
       onPressed: onPress, 
       child: Text(label)
     );
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.red.shade200
+        color: Theme.of(context).colorScheme.surfaceBright
         ),
       child: FractionallySizedBox(
         widthFactor: 1,
@@ -110,6 +110,7 @@ class _HomePageState extends State<HomePage> {
   // Widget: Changelog cards
   Card createChangelogCard(BuildContext context, String title, String summary) {
     Card card = Card(
+      color: Theme.of(context).colorScheme.surfaceBright,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Column(

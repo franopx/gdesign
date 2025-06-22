@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gdesign/pages/home_page.dart';
 import 'package:gdesign/pages/library_page.dart';
+import 'package:gdesign/pages/preferences_page.dart';
 import 'package:gdesign/pages/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,15 +18,20 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const LibraryPage(),
     const ProfilePage(),
+    const PreferencesPage(),
   ];
 
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold(
-      appBar: AppBar(title: 
-        Text('GDesign', style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer)), 
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer, foregroundColor: Theme.of(context).colorScheme.surface,),
+    return PopScope(
+      canPop: currentPage == 0,
+      onPopInvokedWithResult: (bool didPop, result) {
+          if (!didPop && currentPage != 0) {
+            setState(() => currentPage = 0); // Navega al Home
+          }
+        },
+      child: Scaffold(
       body: pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
@@ -37,16 +43,19 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home'),
+            icon: Icon(Icons.casino),
+            label: 'Inicio'),
           BottomNavigationBarItem(
             icon: Icon(Icons.library_books),
-            label: 'Library'),
+            label: 'Galería'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile'),
+            icon: Icon(Icons.info),
+            label: 'Acerca de'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Preferencias'),
         ]
       ),
-    );
+    ));
   }
 }

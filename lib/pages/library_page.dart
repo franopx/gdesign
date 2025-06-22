@@ -3,6 +3,10 @@ import 'package:gdesign/domain/entities/generator.dart';
 import 'package:gdesign/domain/entities/generator.dart';
 import 'package:gdesign/domain/entities/prompt.dart';
 
+import 'package:gdesign/widgets/concept_card.dart';
+import 'package:gdesign/domain/entities/card_data.dart';
+import 'package:gdesign/domain/entities/database_helper.dart';
+
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
 
@@ -12,175 +16,100 @@ class LibraryPage extends StatefulWidget {
 
 class _LibraryPageState extends State<LibraryPage> {
 
-  void cardDetails() {}
+  List<Map<String, dynamic>> _concepts = [];
 
-  // Widget: Changelog cards
-  Card createPromptCard(BuildContext context) {
-    Prompt prompt = Generator().generateConcept();
-    String title = prompt.text;
-    Image icon = prompt.icon;
+  bool _isLoading = true;
+  final DatabaseHelper db = DatabaseHelper();
 
-    Card card = Card(
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: SizedBox(
-          height: 150,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(height: 5,),
+  @override
+  void initState() {
+    super.initState();
+    _loadConcepts();
+  }
 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  icon,
-                  SizedBox(width: 5,),
-                  Expanded(
-                    child: Align(alignment: Alignment.topLeft, 
-                      child: 
-                        Text(
-                          title,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
-                        )
-                    ),
-                  ),
-              ],),
+  Future<void> _loadConcepts() async {
+    try {
+      final List<CardData> concepts = await db.getAllConcepts();
+      
+      setState(() {
+        _concepts = concepts.map((card) => card.toMap()).toList();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() => _isLoading = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al cargar conceptos: $e')),
+      );
+    }
+  }
 
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text('Remove prompt'),
-                            content: Text('Are you sure you want to delete this prompt?\n\n$title'),
-                            actions: [
-                              TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('No')),
-                              TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text('Yes')),
-                            ],)
-                        );
-                      }, 
-                      child: Text('Remove')
-                    )
-                  ),
+  String _sortBy = 'date';
 
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                      onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Feature coming next update!')),);}, 
-                      child: Text('Edit')
-                    )
-                  ),
+  void _deleteConcept(int index, String conceptId) async {
+    await db.deleteConcept(conceptId);
+    setState(() {
+      _concepts.removeAt(index);
+    });
+  }
 
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                      onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(seconds: 1), content: Text('Prompt copied!')),);}, 
-                      child: Text('Copy')
-                    )
-                  )
-
-                ],
-              ),
-            ],
-          )
-        )
-      )
-    );
-    return card;
+  void _updateConcept(int index, String id, String newTitle, String newNotes) async {
+    await db.updateConcept(id, newTitle, newNotes);
+    setState(() {
+      _concepts[index]['title'] = newTitle;
+      _concepts[index]['notes'] = newNotes;
+    });
   }
 
 
+  void _updateSort() {
+    setState(() {
+      _concepts.sort((a, b) {
+      switch (_sortBy) {
+        case 'title':
+          return a['title'].compareTo(b['title']);
+        case 'genre':
+          return a['genre'].compareTo(b['genre']);
+        default:
+          return b['date'].compareTo(a['date']);
+      }
+    });
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: FractionallySizedBox(
-      alignment: Alignment.center,
-      widthFactor: 0.97,
-        child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Center(
-          child: Column(
-            children: [
-              
-              SizedBox(height: 5,),
-
-              const Text(
-                'Prompt library',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                )
-              ),
-
-              SizedBox(height: 10),
-
-              Expanded(
-
-                child: Scrollbar(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          createPromptCard(context),
-                          createPromptCard(context),
-                          createPromptCard(context),
-                          createPromptCard(context),
-                          createPromptCard(context),
 
 
-                        ],)
-                  )),
-                )
-              ),
 
-              FractionallySizedBox(
-                widthFactor: 0.9,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('New prompt'),
-                        content: 
-                          SizedBox(width: 500, height: 300,
-                            child:
-                              Column(children: [
-                                Row(children: [Text('Text: '), Text(' Write here...', style: TextStyle(color: Colors.blueGrey),)],),
-                                Row(
-                                  children: [Text('Icon: '), 
-                                  DropdownButton<String>(
-                                    value: '0',
-                                    onChanged: (value) {},
-                                    items: [
-                                      DropdownMenuItem(value: '0', child: Text('idea')),
-                                      DropdownMenuItem(value: '1', child: Text('sword')),
-                                      DropdownMenuItem(value: '2', child: Text('gun')),
-                                      DropdownMenuItem(value: '3', child: Text('puzzle')),
-                                      DropdownMenuItem(value: '4', child: Text('jump'))
-                                    ],
-                                  )],)
-                              ],)
-                          ),
-                        actions: [
-                          TextButton(child: Text('Cancel'), onPressed: () {Navigator.of(context).pop();}),
-                          TextButton(child: Text('Save'), onPressed: () {Navigator.of(context).pop();})
-                        ],
-                      )
-                    );
-                  }, 
-                  child: Text('Add manual prompt')
-                )
-              ),
-              
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Galería', style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer)), 
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer, foregroundColor: Theme.of(context).colorScheme.surface,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {_sortBy = value; _updateSort();},
+            itemBuilder: (context) => [
+              PopupMenuItem(value: 'date', child: Text('Ordenar por fecha')),
+              PopupMenuItem(value: 'title', child: Text('Ordenar por título')),
+              PopupMenuItem(value: 'genre', child: Text('Ordenar por género')),
             ],
-          )
-        )
-      )
-    ));
+            icon: Icon(Icons.sort),
+          ),
+        ],
+        ),
+      body: ListView.builder(
+        itemCount: _concepts.length,
+        itemBuilder: (context, index) {
+          final concept = _concepts[index];
+          return ConceptCard(
+            key: ValueKey(concept['id']),
+            id: concept['id'],
+            onDelete: () => _deleteConcept(index, concept['id']),
+            onTitleChanged: (newTitle) => _updateConcept(index, concept['id'], newTitle, concept['notes']),
+            onNotesChanged: (newNotes) => _updateConcept(index, concept['id'], concept['title'], newNotes),
+          );
+        },
+      ),
+      );
   }
 }

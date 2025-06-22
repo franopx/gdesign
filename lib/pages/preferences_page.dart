@@ -54,7 +54,9 @@ class _PreferencesPageState extends State<PreferencesPage> {
     var appdata = context.watch<AppData>();
 
     return Scaffold(
-      appBar: AppBar(title: Text('Preferencias')),
+      appBar: AppBar(
+        title: Text('GDesign', style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer)), 
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer, foregroundColor: Theme.of(context).colorScheme.surface,),
       body: ListView(
         children: [
           UsernamePreference(

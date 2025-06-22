@@ -33,6 +33,7 @@ class _ConceptGeneratorState extends State<ConceptGenerator> {
     'objective': Colors.purpleAccent,
   };
 
+  String _username = 'Usuario';
 
   void _loadPreferences() async {
     Map<String, Color> loadedColors = {
@@ -42,8 +43,11 @@ class _ConceptGeneratorState extends State<ConceptGenerator> {
       'objective' : await PreferencesManager.getCategoryColor('objective'),
     };
 
+    String loadedUsername = await PreferencesManager.getUsername();
+
     setState(() {
       _deckColors = loadedColors;
+      _username = loadedUsername;
     });
   }
 
@@ -130,6 +134,11 @@ class _ConceptGeneratorState extends State<ConceptGenerator> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
+          Text('Hola, $_username.', style: TextStyle(fontSize: 18),),
+          SizedBox(
+            height: 60,
+            child: _currentCards.values.every((card) => card != null) ? const Text('Presiona el botón "Guardar" para almacenar el concepto en la galería.') : const Text('Pulsa los botones de dados o el botón de "Generar" para crear un concepto.') ,
+            ),
           // Lista de cartas/barajas
           Expanded(
             child: ListView(
@@ -170,7 +179,7 @@ class _ConceptGeneratorState extends State<ConceptGenerator> {
                     _saveConcept();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Genera todas las cartas primero!')),
+                      const SnackBar(content: Text('¡Genera todas las cartas primero!')),
                     );
                   }
                 },

@@ -25,10 +25,10 @@ class CardData {
     return {
       'id': id,
       'title': title,
-      'Género': genre,
-      'Setting': setting,
-      'Giro': twist,
-      'Meta': objective,
+      'genre': genre,
+      'setting': setting,
+      'twist': twist,
+      'objective': objective,
       'notes': notes,
       'date': date.toString(),
     };

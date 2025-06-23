@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppData extends ChangeNotifier {
 
-
   String _username = 'user';
   String get username => _username;
 

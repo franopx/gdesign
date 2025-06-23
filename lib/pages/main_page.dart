@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gdesign/pages/home_page.dart';
 import 'package:gdesign/pages/library_page.dart';
 import 'package:gdesign/pages/preferences_page.dart';
-import 'package:gdesign/pages/profile_page.dart';
+import 'package:gdesign/pages/about_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,8 +17,9 @@ class _MainPageState extends State<MainPage> {
   List<Widget> pages = [
     const HomePage(),
     const LibraryPage(),
-    const ProfilePage(),
     const PreferencesPage(),
+    const AboutPage(),
+
   ];
 
   @override
@@ -49,11 +50,11 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.library_books),
             label: 'Galería'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Acerca de'),
-          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Preferencias'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Acerca de'),
         ]
       ),
     ));

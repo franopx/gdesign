@@ -49,3 +49,4 @@ En esta pantalla se muestra la descripción, creador, contacto y una encuesta de
 
 ## Aplicación
 El instalable de la aplicación se encuentra en la sección de releases del repositorio.
+[Link](https://github.com/franopx/gdesign/releases/tag/apk)

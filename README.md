@@ -1,24 +1,38 @@
 # GDesign
 
-A game conceptualizing app, that generates videogame prompts to help game designers start designing a game idea. 
+App para conceptualizar ideas de videojuegos generadas aleatoriamente.
 
-Link to video: https://youtu.be/bspFUhKu_2E
+Link al video: [Youtube](https://youtu.be/cxJRu-9aqMM)
+Link a la presentación en PDF: [Drive](https://drive.google.com/file/d/18jHxFOIWUC5xHz6AiF2cOV7c4ePCUuOZ/view?usp=sharing)
 
-## Getting Started
+## Guía rápida
 
-In GDesign there are 3 main pages: Home, Library and Profile
+En GDesign hay cuatro pantallas principales: Home, galería, preferencias y acerca de.
 
 ### Home
-Here is the place to generate the game concepts, you can press generate to make new prompts quicky, copy them to the clipboard or save them to the library.
+Este es el lugar donde se generan los conceptos, cada categoría cuenta con su propio botón para generar y también hay un botón para generar todas las categorías al mismo tiempo.
+Se puede reestablecer el concepto o guardarlo en la galería.
 
-![image](https://github.com/user-attachments/assets/05c17021-62cf-4518-8a12-6140717f6f85)
+![image](https://github.com/user-attachments/assets/2d153bc5-58c6-40c9-a2f5-ccf0cf54e2cc)
 
-### Library
-Here is where the saved prompts are. In this page you can edit, copy, remove and add custom prompts.
+### Galería
+En esta página puedes revisar los conceptos que tengas guardados, también se pueden ordenar, borrar, editar título o notas y exportar a imagen.
 
-![image](https://github.com/user-attachments/assets/8148ea64-b153-4824-bb70-9a1465ee8d65)
+![image](https://github.com/user-attachments/assets/3fb55e0f-7efd-42d2-8ed8-ba82f42c2afc)
 
-### Profile
-You can view user info like name, email and profile picture. In this page is the about section of the app too.
+### Preferencias
+En esta pantalla se pueden personalizar aspectos de la aplicación como nombre de usuario, tema de colores y colores para cada categoría.
 
-![image](https://github.com/user-attachments/assets/c3cbe066-b6ef-4899-8f09-18bcd6c49ab3)
+![image](https://github.com/user-attachments/assets/0265f6d0-1a05-4b77-ba15-b8e315e21a1b)
+
+### Acerca de
+En esta pantalla se muestra la descripción, creador, contacto y una encuesta de valoración.
+![image](https://github.com/user-attachments/assets/1fad20d9-0af3-4120-b28a-66455879af2c)
+
+## Capturas de pantalla
+![image](https://github.com/user-attachments/assets/dba273bd-5fa5-4bd5-8fa0-552542d65886)
+![image](https://github.com/user-attachments/assets/239388dd-c891-47e1-b9cc-7e17c1203b00)
+![image](https://github.com/user-attachments/assets/b397bd3c-5185-4a47-91cc-e99b87e9b11a)
+
+## Aplicación
+El instalable de la aplicación se encuentra en la sección de releases del repositorio.

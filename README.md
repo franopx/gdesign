@@ -5,6 +5,19 @@ App para conceptualizar ideas de videojuegos generadas aleatoriamente.
 Link al video: [Youtube](https://youtu.be/cxJRu-9aqMM)
 Link a la presentación en PDF: [Drive](https://drive.google.com/file/d/18jHxFOIWUC5xHz6AiF2cOV7c4ePCUuOZ/view?usp=sharing)
 
+## Requerimientos
+- La aplicación debe permitir la generación de conceptos aleatorios
+- Debe permitir el guardado persistente de conceptos de videojuegos
+- Debe permitir la edición y eliminación de conceptos
+- Debe permitir la personalización de aspectos visuales de la app
+- Debe permitir la visualización de la totalidad de los conceptos guardados
+
+## Diagramas
+Diagrama de flujo de pantallas:
+![screen flow](https://github.com/user-attachments/assets/a33c0fa3-e88e-4042-975c-680c343b3eae)
+Diagrama de flujo:
+![Untitled Diagram drawio](https://github.com/user-attachments/assets/a9de0550-1e09-4b5c-9906-3388cd2c9a83)
+
 ## Guía rápida
 
 En GDesign hay cuatro pantallas principales: Home, galería, preferencias y acerca de.

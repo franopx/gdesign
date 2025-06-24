@@ -18,7 +18,7 @@ class AppData extends ChangeNotifier {
     'objective': Colors.purple,
   };
 
-  Future<void> _loadPreferences() async {
+  Future<void> loadPreferences() async {
     _username = await PreferencesManager.getUsername();
     _dark_mode = await PreferencesManager.getDarkMode();
     _categoryColors = {

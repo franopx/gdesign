@@ -298,7 +298,7 @@ class _ConceptCardState extends State<ConceptCard> {
       child: Row(
         children: [
           Text('$label: ', style: TextStyle(fontWeight: FontWeight.bold)),
-          Text(value),
+          Expanded(child: Text(value)),
         ],
       ),
     );

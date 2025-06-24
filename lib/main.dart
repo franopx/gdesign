@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     TextTheme textTheme = createTextTheme(context, "Montserrat", "Montserrat");
     MaterialTheme theme = MaterialTheme(textTheme);
     return ChangeNotifierProvider<AppData>(
-      create: (context) => AppData(),
+      create: (context) => AppData()..loadPreferences(),
       builder: (context, child) {
         return MaterialApp(
           title: 'Game Design',
